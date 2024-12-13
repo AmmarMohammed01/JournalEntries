@@ -3,10 +3,28 @@ import { useState } from 'react'
 function App() {
   const [title, setTitle] = useState("");
   const [entry, setEntry] = useState("");
+  const [jTime, setJTime] = useState();
 
   function handleSubmit(e) {
     // Prevent the browser from reloading the page
     e.preventDefault();
+
+    const journalSubmissionTime = new Date();
+    const [year, month, date, hours, minutes, seconds] = [
+      journalSubmissionTime.getFullYear(), //2024
+      journalSubmissionTime.getMonth(), //from 0 to 11, Jan to Dec
+      journalSubmissionTime.getDate(), //1 to 31; getDay means Mon Tue Wed...
+      journalSubmissionTime.getHours(), //7pm is 19
+      journalSubmissionTime.getMinutes(), //from 0 to 59
+      journalSubmissionTime.getSeconds(),
+    ];
+    console.log(year, month, date, hours, minutes, seconds);  
+    //console.log(journalSubmissionTime.toISOString());
+
+    //DATETIME - format: YYYY-MM-DD HH:MI:SS
+    const sqlTimeFormat = `${year}-${month + 1}-${date} ${hours}:${minutes}:${seconds}`
+    
+    console.log(sqlTimeFormat);
 
     // Read the form data
     const form = e.target;
@@ -18,6 +36,7 @@ function App() {
 
     setTitle(formJson.jTitle);
     setEntry(formJson.jEntry);
+    setJTime(journalSubmissionTime.toString());
   }
 
   return (
@@ -33,6 +52,7 @@ function App() {
 
       <p>{title}</p>
       <p>{entry}</p>
+      <p>{jTime}</p>
     </>
   )
 }
