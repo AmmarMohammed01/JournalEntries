@@ -8,7 +8,7 @@ function App() {
 
   useEffect(
     () => {
-      fetch('http://localhost:8081/users')
+      fetch('http://localhost:8081/entries')
       .then(res => res.json())
       .then(data => setData(data)) //data => console.log(data)
       .catch(err => console.log(err));
@@ -67,20 +67,18 @@ function App() {
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>PASSWORD</th>
-            <th>USERNAME</th>
+            <th>TITLE</th>
+            <th>DATE</th>
+            <th>ENTRY</th>
           </tr>
         </thead>
         <tbody>
           {
           data.map( (d, i) => (
             <tr key={i}>
-              <td>{d.id}</td>
-              <td>{d.name}</td>
-              <td>{d.password}</td>
-              <td>{d.username}</td>
+              <td>{d.Title}</td>
+              <td>{d.Date}</td>
+              <td>{d.Entry}</td>
             </tr>
             )
            )}

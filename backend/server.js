@@ -9,8 +9,8 @@ const port = 8081
 
 const db = mysql.createConnection(dbConfig);
 
-app.get('/users', (req, res) => {
-  const sql = "SELECT * FROM users";
+app.get('/entries', (req, res) => {
+  const sql = "SELECT * FROM entries";
   db.query(sql, (err, data) => {
     if(err) return res.json(err);
     return res.json(data);
