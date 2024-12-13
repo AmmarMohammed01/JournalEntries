@@ -18,13 +18,12 @@ function App() {
       journalSubmissionTime.getMinutes(), //from 0 to 59
       journalSubmissionTime.getSeconds(),
     ];
-    console.log(year, month, date, hours, minutes, seconds);  
-    //console.log(journalSubmissionTime.toISOString());
 
     //DATETIME - format: YYYY-MM-DD HH:MI:SS
     const sqlTimeFormat = `${year}-${month + 1}-${date} ${hours}:${minutes}:${seconds}`
-    
-    console.log(sqlTimeFormat);
+
+    //Add the sqlTimeFormat string to the form
+    document.getElementById("jTime").value = sqlTimeFormat;
 
     // Read the form data
     const form = e.target;
@@ -36,7 +35,8 @@ function App() {
 
     setTitle(formJson.jTitle);
     setEntry(formJson.jEntry);
-    setJTime(journalSubmissionTime.toString());
+    //setJTime(journalSubmissionTime.toString());
+    setJTime(formJson.jTime);
   }
 
   return (
@@ -46,6 +46,7 @@ function App() {
       <form action="post" onSubmit={handleSubmit}>
         <input type="text" name="jTitle" placeholder="Title here" />
         <input type="text" name="jEntry" placeholder="Type entry here" />
+        <input type="hidden" name="jTime" id="jTime" />
         <button type="reset">Reset form</button>
         <button type="submit">Submit form</button>
       </form>
