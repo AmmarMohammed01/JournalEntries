@@ -12,9 +12,6 @@ function App() {
       .then(res => res.json())
       .then(data => setData(data)) //data => console.log(data)
       .catch(err => console.log(err));
-
-      console.log(data);
-      data.map( (d, i) => { console.log(d.id, d.name, d.password, d.username)})
     }, [])
 
   function handleSubmit(e) {
@@ -78,8 +75,7 @@ function App() {
         </thead>
         <tbody>
           {
-          data.map( (d, i) => {
-            return (
+          data.map( (d, i) => (
             <tr key={i}>
               <td>{d.id}</td>
               <td>{d.name}</td>
@@ -87,7 +83,7 @@ function App() {
               <td>{d.username}</td>
             </tr>
             )
-          } )}
+           )}
         </tbody>
       </table>
     </>
