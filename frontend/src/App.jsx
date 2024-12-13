@@ -1,9 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function App() {
   const [title, setTitle] = useState("");
   const [entry, setEntry] = useState("");
   const [jTime, setJTime] = useState();
+  const [data, setData] = useState([]);
+
+  useEffect(
+    () => {
+      fetch('http://localhost:8081/users')
+      .then(res => res.json())
+      .then(data => setData(data)) //data => console.log(data)
+      .catch(err => console.log(err));
+
+      console.log(data);
+      data.map( (d, i) => { console.log(d.id, d.name, d.password, d.username)})
+    }, [])
 
   function handleSubmit(e) {
     // Prevent the browser from reloading the page
@@ -54,6 +66,30 @@ function App() {
       <p>{title}</p>
       <p>{entry}</p>
       <p>{jTime}</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>PASSWORD</th>
+            <th>USERNAME</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+          data.map( (d, i) => {
+            return (
+            <tr key={i}>
+              <td>{d.id}</td>
+              <td>{d.name}</td>
+              <td>{d.password}</td>
+              <td>{d.username}</td>
+            </tr>
+            )
+          } )}
+        </tbody>
+      </table>
     </>
   )
 }
