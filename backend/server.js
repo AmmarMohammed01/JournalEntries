@@ -5,6 +5,7 @@ const dbConfig = require('./dbConfig');
 
 const app = express()
 app.use(cors())
+app.use(express.json())
 const port = 8081
 
 const db = mysql.createConnection(dbConfig);
@@ -12,6 +13,21 @@ const db = mysql.createConnection(dbConfig);
 app.get('/entries', (req, res) => {
   const sql = "SELECT * FROM entries";
   db.query(sql, (err, data) => {
+    if(err) return res.json(err);
+    return res.json(data);
+  })
+})
+
+app.post('/add', (req, res) => {
+  const sql = "INSERT INTO entries (`Title`, `Date`, `Entry`) VALUES(?)";
+
+  const values = [
+    req.body.jTitle,
+    req.body.jTime,
+    req.body.jEntry,
+  ];
+
+  db.query(sql, [values], (err, data) => {
     if(err) return res.json(err);
     return res.json(data);
   })

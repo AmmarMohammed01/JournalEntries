@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useEffect, useState } from 'react'
 
 function App() {
@@ -5,6 +6,7 @@ function App() {
   const [entry, setEntry] = useState("");
   const [jTime, setJTime] = useState();
   const [data, setData] = useState([]);
+  const [updateTable, toggleUpdateTable] = useState(0);
 
   useEffect(
     () => {
@@ -14,6 +16,15 @@ function App() {
       .catch(err => console.log(err));
     }, [])
 
+  useEffect(
+    () => {
+      fetch('http://localhost:8081/entries')
+      .then(res => res.json())
+      .then(data => setData(data)) //data => console.log(data)
+      .catch(err => console.log(err));
+    }, [updateTable]
+  )
+  
   function handleSubmit(e) {
     // Prevent the browser from reloading the page
     e.preventDefault();
@@ -46,6 +57,15 @@ function App() {
     setEntry(formJson.jEntry);
     //setJTime(journalSubmissionTime.toString());
     setJTime(formJson.jTime);
+
+    fetch('http://localhost:8081/add', { 
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formJson), }
+    );
+    toggleUpdateTable(updateTable+1);
   }
 
   return (
@@ -54,8 +74,8 @@ function App() {
 
       <form action="post" onSubmit={handleSubmit}>
         <input type="text" name="jTitle" placeholder="Title here" />
-        <input type="text" name="jEntry" placeholder="Type entry here" />
         <input type="hidden" name="jTime" id="jTime" />
+        <input type="text" name="jEntry" placeholder="Type entry here" />
         <button type="reset">Reset form</button>
         <button type="submit">Submit form</button>
       </form>
