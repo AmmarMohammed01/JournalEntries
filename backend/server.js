@@ -33,6 +33,16 @@ app.post('/add', (req, res) => {
   })
 })
 
+app.post('/delete', (req, res) => {
+  const sql = `DELETE FROM entries WHERE Id=${req.body.jId}`;
+
+  //console.log(req.body.jId);
+  db.query(sql, (err, data) => {
+    if(err) return res.json(err);
+    return res.json(data);
+  })
+})
+
 app.get('/', (req, res) => {
   return res.json("This is a response from backend!");
   //res.send('Hello World!') //this seems to create an HTML webpage at a route (like Flask)

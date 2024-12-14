@@ -68,6 +68,20 @@ function App() {
     toggleUpdateTable(updateTable+1);
   }
 
+  function deleteRow(id) {
+    const form = { jId: id}
+    console.log(JSON.stringify(form));
+
+    fetch('http://localhost:8081/delete', { 
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form), }
+    );
+    toggleUpdateTable(updateTable+1);
+  }
+
   return (
     <>
       <p>Journal Entries</p>
@@ -87,6 +101,7 @@ function App() {
       <table>
         <thead>
           <tr>
+            <th>ID</th>
             <th>TITLE</th>
             <th>DATE</th>
             <th>ENTRY</th>
@@ -96,9 +111,11 @@ function App() {
           {
           data.map( (d, i) => (
             <tr key={i}>
+              <td>{d.Id}</td>
               <td>{d.Title}</td>
               <td>{d.Date}</td>
               <td>{d.Entry}</td>
+              <button onClick={() => (deleteRow(d.Id))}>Delete</button>
             </tr>
             )
            )}
