@@ -1,0 +1,27 @@
+.entry-table {
+  margin-top: 20px;
+  display: grid;
+  place-self: center;
+  /* border: solid; */
+  border-radius: 10px;
+}
+
+.entry-table-date, .entry-table-date-header {
+  width: 150px;
+  border: solid;
+  padding: 10px;
+}
+
+.entry-table-date-header {
+  border-radius: 20px 0px 0px 0px;
+}
+
+.entry-table-title, .entry-table-title-header {
+  width: 500px;
+  border: solid;
+  padding: 10px;
+}
+
+.entry-table-title-header {
+  border-radius: 0px 20px 0px 0px;
+}
