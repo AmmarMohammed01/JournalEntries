@@ -1,10 +1,39 @@
 import { useEffect, useState } from 'react';
 import './styles/table.css';
 
-export default function Table() {
-  let entries = []
-  for(let i = 0; i < 3; i++ ) entries[i] = {date: '12/20/2024', title: `Example Entry ${i+1}`};
-  console.log(entries);
+export default function Table({trigger = 'testvalue2'}) {
+  const [data, setData] = useState([]);
+
+  useEffect(
+    () => {
+      fetch('http://localhost:8081/entries')
+      .then(res => res.json())
+      .then(data => setData(data)) //data => console.log(data)
+      .catch(err => console.log(err));
+    }, []);
+
+  useEffect(
+    () => {
+      fetch('http://localhost:8081/entries')
+      .then(res => res.json())
+      .then(data => setData(data)) //data => console.log(data)
+      .catch(err => console.log(err));
+    }, [trigger]
+  );
+
+  function deleteRow(id) {
+    const form = { jId: id}
+    console.log(JSON.stringify(form));
+
+    fetch('http://localhost:8081/delete', { 
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form), }
+    );
+    toggleUpdateTable(updateTable+1);
+  }
 
   return (<>
     <table className='entry-table'>
@@ -15,13 +44,13 @@ export default function Table() {
         </tr>
       </thead>
       <tbody>
-        {entries.map( (entry, i) => (
+        {data.map( (entry, i) => (
           <tr key={i}>
             <td className='entry-table-date'>
-              {entry.date}
+              {entry.Date}
             </td>
             <td className='entry-table-title'>
-              {entry.title}
+              {entry.Title}
             </td>
           </tr>
         ) )}

@@ -10,10 +10,14 @@
 
 .show-visibility {
   visibility: visible;
+  opacity: 1;
+  transition: opacity 0.15s linear;
 }
 
 .hide-visibility {
   visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.15s, opacity 0.15s linear;
 }
 
 .form-content {
@@ -79,6 +83,7 @@
   color: white;
   /* box-shadow: inset 1px 1px 5px rgba(0,0,0,0.3); */
   transition: background-color 0.5s;
+  cursor: pointer;
 }
 
 .entry-submit:hover {
@@ -95,4 +100,9 @@
   border: none;
   padding: 10px 13px;
   border-radius: 20px;
+  transition: background-color 0.5s;
+}
+
+.form-close-btn:hover {
+  background-color: rgb(100, 100, 100);
 }
