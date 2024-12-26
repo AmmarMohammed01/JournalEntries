@@ -5,9 +5,11 @@ import Form from './form.jsx'
 import Table from './Table.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <>
+  {/* <StrictMode> */}
     {/* <App /> */}
-    <Form/>
     <Table/>
-  </StrictMode>,
+    <Form/>
+  {/* </StrictMode>, */}
+  </>
 )

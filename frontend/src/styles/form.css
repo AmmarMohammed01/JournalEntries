@@ -1,3 +1,36 @@
+.overlay {
+  background-color: rgba(0,0,0,0.5);
+  
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.show-visibility {
+  visibility: visible;
+}
+
+.hide-visibility {
+  visibility: hidden;
+}
+
+.form-content {
+  position: absolute;
+  top: 50px;
+  bottom: 50px;
+  left: 50px;
+  right: 50px;
+  background-color: white;
+
+  border-radius: 20px;
+
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+}
+
 .title {
   display: grid;
   place-self: center;
@@ -50,4 +83,16 @@
 
 .entry-submit:hover {
   background-color: rgb(70, 160, 255);
+}
+
+.form-close-btn {
+  position: absolute;
+  top: 70px;
+  right: 70px;
+
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 13px;
+  border-radius: 20px;
 }
