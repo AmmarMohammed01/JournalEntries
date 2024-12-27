@@ -1,0 +1,53 @@
+.overlay-viewentry {
+  background-color: rgba(0,0,0,0.5);
+  
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.show-visibility {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.15s linear;
+}
+
+.hide-visibility {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.15s, opacity 0.15s linear;
+}
+
+.viewentry-content {
+  position: absolute;
+  top: 50px;
+  bottom: 50px;
+  left: 50px;
+  right: 50px;
+  background-color: white;
+
+  border-radius: 20px;
+
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+}
+
+.viewentry-close-btn {
+  position: absolute;
+  top: 70px;
+  right: 70px;
+
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 13px;
+  border-radius: 20px;
+  transition: background-color 0.5s;
+}
+
+.viewentry-close-btn:hover {
+  background-color: rgb(100, 100, 100);
+}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './styles/table.css';
 
-export default function Table({trigger = 'testvalue2'}) {
+export default function Table({onDataSend, trigger = 'testvalue2'}) {
   const [data, setData] = useState([]);
 
   useEffect(
@@ -51,6 +51,7 @@ export default function Table({trigger = 'testvalue2'}) {
             </td>
             <td className='entry-table-title'>
               {entry.Title}
+              <button onClick={() => (onDataSend(entry.Title, entry.Date, entry.Entry))}>View</button>
             </td>
           </tr>
         ) )}
